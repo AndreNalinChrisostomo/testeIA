@@ -37,7 +37,8 @@ class RedeNeural:
         for x in range(num_layers):
             if x == 0:
                 continue
-            self.bias.append(np.random.randn(self.formatoRedeNeural[x], 1))
+            self.bias.append(np.ones(self.formatoRedeNeural[x]))
+        
         
         #self.weights = np.array(self.weights)
 
@@ -47,14 +48,15 @@ class RedeNeural:
             #multiplica os pesos por os inputs
             print(f"########## OUTPUT LAYER: {x+1} ############")
 
-            
-
-
             #soma ponderada
             self.inputs = np.dot(self.inputs, self.weights[x-1])
+            for y in self.inputs:
+                y += self.bias[x-1]
+            
+            #self.inputs += self.bias[x-1]
             self.inputs = self.activate_relu(self.inputs)
             print(self.inputs)
-           # print(self.inputs)
+            
             print(f"########## OUTPUT LAYER: {x+1} ############\n\n")
 
             
